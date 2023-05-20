@@ -6,12 +6,14 @@ import pandas as pd
 
 
 class TDParser(Parser):
+    #TDParser has a constructor, it contains same items that Grammar.
     def __init__(self, gramatic):
         super().__init__(gramatic)
 
+    #Verify if grammar is LL(1).
     def ll1_verification(self):
         pass
-        
+    
     def predictive_parsing_table(self) -> list:
         non_terminals_len = [0] * len(self.grammar.Non_Terminals)
         terminals = [i for i in self.grammar.Non_Terminals]
@@ -32,8 +34,6 @@ class TDParser(Parser):
                         continue  
                     if predictive_pt.loc[nt,terminal] != 0: raise Exceptions.Not_LL1Gramar("La gramatica no es LL(1)")
                     else: predictive_pt.loc[nt,terminal] = production
-                    
-        
         return predictive_pt    
     
     def analixer_word(self, word: str):
