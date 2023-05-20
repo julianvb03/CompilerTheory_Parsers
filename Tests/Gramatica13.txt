@@ -1,0 +1,10 @@
+Símbolo Inicial = E
+Símbolos no terminales = E,G,H,B,V,A
+Símbolos terminales = y,x,b,ε
+Producciones:
+E: yGH
+G: A | B
+H: xH | ε
+B: bV
+V: A | bA
+A: ε

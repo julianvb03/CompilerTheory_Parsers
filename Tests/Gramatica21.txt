@@ -1,0 +1,7 @@
+Símbolo Inicial = T
+Símbolos no terminales = T,P,V
+Símbolos terminales = b,c,ε
+Producciones:
+T : VP
+P : bTP | ε
+V : cV | c

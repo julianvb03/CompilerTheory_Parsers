@@ -1,0 +1,5 @@
+Símbolo Inicial = S
+Símbolos no terminales = S
+Símbolos terminales = a,c,d,b
+Producciones:
+S : aSb | c | d

@@ -1,0 +1,10 @@
+Símbolo Inicial = S
+Símbolos no terminales = S,A,B,C,D,E
+Símbolos terminales = a,b,c,d,e,ε
+Producciones:
+S : ABCDE
+A : a | ε
+B : b | ε
+C : c | ε
+D : d | ε
+E : e | ε

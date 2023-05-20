@@ -1,0 +1,8 @@
+Símbolo Inicial = P
+Símbolos no terminales = P,Q,R,S
+Símbolos terminales = w,x,y,z,ε
+Producciones:
+P : xQRS
+Q : yz | z
+R : w | ε
+S : y

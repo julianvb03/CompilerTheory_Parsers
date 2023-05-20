@@ -1,0 +1,6 @@
+Símbolo Inicial = Q
+Símbolos no terminales = Q,A
+Símbolos terminales = a,b
+Producciones:
+Q: aAQ | b
+A: a | bQA

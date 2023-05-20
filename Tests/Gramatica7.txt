@@ -1,0 +1,8 @@
+Símbolo Inicial = E
+Símbolos no terminales = E,A,B,C
+Símbolos terminales = (,),;,x,ε
+Producciones:
+E : (A)
+A : CB
+B : ;A | ε
+C : x | E

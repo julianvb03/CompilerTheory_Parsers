@@ -1,0 +1,7 @@
+Símbolo Inicial = S
+Símbolos no terminales = S,L,G
+Símbolos terminales = (,),a,;,ε
+Producciones:
+S : (L) | a
+L : SG
+G : ;SG | ε

@@ -1,0 +1,9 @@
+Símbolo Inicial = E
+Símbolos no terminales = E,T,O,F,P
+Símbolos terminales = +,i,*,(,),ε
+Producciones:
+E : TO
+O : +TO | ε
+T : FP
+P : *FP | ε
+F : (E) | i

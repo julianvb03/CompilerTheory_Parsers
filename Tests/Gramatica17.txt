@@ -1,0 +1,10 @@
+Símbolo Inicial = S
+Símbolos no terminales = S,V,D,T,P,U
+Símbolos terminales = i,>,(,),b,ε,n,;
+Producciones:
+S : VS | ε
+V : Di;
+D : T | ε
+T : UP
+P : >UP | ε
+U : b | n | (T)

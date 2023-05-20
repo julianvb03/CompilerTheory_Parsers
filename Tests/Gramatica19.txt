@@ -1,0 +1,7 @@
+Símbolo Inicial = S
+Símbolos no terminales = S,L,R
+Símbolos terminales = -,*,i,ε
+Producciones:
+S : L-R | R
+L : *R |i
+R : L
