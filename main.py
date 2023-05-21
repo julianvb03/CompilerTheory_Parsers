@@ -38,41 +38,49 @@ def funciones_LR0(num, parser): #Procesar cadena / Sacar first y follow
     elif num == 2:
         print("You selected 2")
         print(parser.__str__())
-
+    
     else:
         default_case()
 
 def case_1(parser):
-    print("=======================================")
-    print("You selected 1")
-    print("Select an option:")
-    print("1. Process string")
-    print("2. First and follow")
-    print("3. Gramatic is LL(1)")
-    print("=======================================\n")
-    
-    option = input("Enter an option: ")
-    if option.isdigit():
-        selected = int(option)
-        funciones_LL1(selected, parser)
-    else:
-        default_case()
+    while True:
+        print("=======================================")
+        print("You selected 1")
+        print("Select an option:")
+        print("1. Process string")
+        print("2. First and follow")
+        print("3. Gramatic is LL(1)")
+        print("4. Exit")
+        print("=======================================\n")
+        
+        option = input("Enter an option: ")
+        if option.isdigit() and option != '4':
+            selected = int(option)
+            funciones_LL1(selected, parser)
+        elif option == '4':
+            break
+        else:
+            default_case()
 
 def case_2(parser):
-    print("You selected 2")
-    print("=======================================")
-    print("You selected 1")
-    print("Select an option:")
-    print("1. Process string")
-    print("2. First and follow")
-    print("=======================================\n")
-    
-    option = input("Enter an option: ")
-    if option.isdigit():
-        selected = int(option)
-        funciones_LR0(selected, parser)
-    else:
-        default_case()
+    while True:
+        print("You selected 2")
+        print("=======================================")
+        print("You selected 1")
+        print("Select an option:")
+        print("1. Process string")
+        print("2. First and follow")
+        print("3. Exit")
+        print("=======================================\n")
+        
+        option = input("Enter an option: ")
+        if option.isdigit() and option != '3':
+            selected = int(option)
+            funciones_LR0(selected, parser)
+        elif option == '3':
+            break
+        else:
+            default_case()
 
 def default_case():
     print("Invalid option")
