@@ -73,19 +73,26 @@ if __name__ == '__main__':
             print("Enter the number of the gramatic")
             print("Enter 0 for termin the program")
             print("=======================================")
-            number = input("Enter the number of the gramatic: ")
+            number = int(input("Enter the number of the gramatic: "))
 
-            option = input("Enter an option: ")
-            if option == 0:
-                break
-            selected = int(option)
-            gramatica = Grammar()
-            grammarPath = "Tests\\Gramatica" + str(number)  + ".txt"
-            gramatica.from_file(grammarPath)
-            os.system('cls' if os.name == 'nt' else 'clear')
+            if(number < 1 or number > 23):
+                print("Invalid option.")
+                break;
+            else:
+                gramatica = Grammar()
+                # Obtener la ruta actual del archivo Python
+                ruta_actual = os.path.dirname(os.path.abspath(__file__))
+                # Construir la ruta completa a la carpeta "Tests"
+                ruta_tests = os.path.join(ruta_actual, 'Tests')
+                nombre_documento = "Gramatica" + str(number)  + ".txt"
+                nombre_documento = str(nombre_documento)
+                ruta_documento = os.path.join(ruta_tests, nombre_documento)
+                
+                gramatica.from_file(ruta_documento)
 
-            parser = TDParser(gramatica.from_file())
-            print()
+                os.system('cls' if os.name == 'nt' else 'clear')
+                # parser = TDParser(gramatica.from_file())
+                print()
             
             print("=======================================")
             print("Select an option:")
@@ -93,6 +100,18 @@ if __name__ == '__main__':
             print("2. LR(0)")
             print("3. Exit")
             print("=======================================\n")
-
-        except:
-            pass
+            if (selected == 1):
+                case_1();
+                break
+            elif(selected == 2):
+                case_2()
+                break;
+            elif(selected == 3):
+                print("Good bye... :)");
+                break;
+            else:
+                default_case()
+                break;
+        except Exception as e:
+            print("Problema:", str(e))
+            
