@@ -9,8 +9,27 @@ class TDParser(Parser):
     def __init__(self, gramatic):
         super().__init__(gramatic)
 
-    def ll1_verification(self):
-        pass
+    def ll1_verification(self) -> bool:
+        for nt in self.grammar.Non_Terminals:
+            for production in self.grammar.Productions[nt]:
+                first_1 = self.first_of_word(production)
+                epsilon_counter = 0
+                if 'ε' in first_1:
+                    epsilon_counter += 1
+                for production2 in self.grammar.Productions[nt]:
+                    if production == production2:
+                        continue
+                    if len(first_1.intersection(self.first_of_word(production2))) > 0:
+                        return False
+                    if 'ε' in self.first_of_word(production2):
+                        epsilon_counter += 1
+                    if 'ε' in first_1 and len(self.first_of_word(production2).intersection(self.follow[nt])) > 0:
+                        return False
+                    elif 'ε' in self.first_of_word(production2) and len(first_1.intersection(self.follow[nt])) > 0:
+                        return False
+                if epsilon_counter > 1:
+                    return False
+        return True
         
     def predictive_parsing_table(self) -> list:
         non_terminals_len = [0] * len(self.grammar.Non_Terminals)

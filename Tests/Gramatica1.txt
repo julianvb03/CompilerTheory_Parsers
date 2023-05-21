@@ -5,6 +5,6 @@ Producciones:
 S : ABCDE
 A : a | ε
 B : b | ε
-C : c | ε
+C : c
 D : d | ε
 E : e | ε
