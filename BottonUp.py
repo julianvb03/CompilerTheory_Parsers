@@ -207,7 +207,3 @@ class BUParser(Parser):
                 return True
             else:
                 return False
-            
-gramatica = Grammar()
-gramatica.from_file("C:\\Users\\valen\\OneDrive\\Escritorio\\Estudio\\Analizadores Sintacticos LFC\\Tests\\Gramatica2.txt")
-parser = BUParser(gramatica)
