@@ -1,11 +1,17 @@
+'''
+Parser.py takes as reference the grammars that previously passed the conversion from .txt files to Grammar objects.
+In addition, the converted grammar will get a pair of sets which are First and Follow.
+'''
 from Grammar import Grammar
 
 class Parser:
+    #Parser has a constructor, it contains: grammas, first and follow.
     def __init__(self, grammar: Grammar) -> None:
         self.grammar = grammar
         self.first = self.first_set()
         self.follow = self.follow_set()
-    
+
+    #Print first and follow
     def __str__(self) -> str:
         first_info = "First:\n"
         for key, value in self.first.items():
@@ -14,42 +20,41 @@ class Parser:
         follow_info = "Follow:\n"
         for key, value in self.follow.items():
             follow_info += f"{key} -> {', '.join(value)}\n"
-        
+    
         return first_info + follow_info
-
     
     '''
     Rules to compute FIRST set:
     1. If x is a terminal, then FIRST (x) = { "x" }
     2. If x-> Є, is a production rule, then add Є to FIRST (x).
-    3. If X->Y1 Y2 Y3….Yn is a production, FIRST (X) = FIRST (Y1)
+    3. If X->Y1 Y2 Y3….Yn is a production, FIRST (X) = FIRST (Y1).
     4. If FIRST (Y1) contains Є then FIRST (X) = { FIRST (Y1) - Є } U { FIRST (Y2) }
     5. If FIRST (Yi) contains Є for all i = 1 to n, then add Є to FIRST (X).
     '''
-    
+    #First
     def first_set(self) -> dict:
-        First = {}
+        First = {}  #Create dictionary.
         
         for symbol in self.grammar.Non_Terminals.union(self.grammar.Terminals):
             if symbol in self.grammar.Terminals:
-                First[symbol] = {symbol}
-            else:
-                First[symbol] = set([])
+                First[symbol] = {symbol}    #Adding only terminal.
+            else:       
+                First[symbol] = set([])     #Creating a terminals-set.
         
         added = True   
-        while added:
+        while added:    #Adding First of non-terminals.
             added = False
             for nt in self.grammar.Non_Terminals:
-                for production in self.grammar.Productions[nt]:
+                for production in self.grammar.Productions[nt]: #Touring production on a non-terminal.
                     for i in range(len(production)):
                         first_sub_i = [First[j] for j in production[:i]]
-                        if i == 0:
+                        if i == 0:  #Empty.
                             first_sub_i.append({'ε'})
                         if 'ε' in set.intersection(*first_sub_i):
                             changed = len(First[nt])
-                            First[nt].update(First[production[i]]-{'ε'})
+                            First[nt].update(First[production[i]]-{'ε'}) #Updatting First withput epsilon.
                             if len(First[nt]) > changed: added = True 
-                    if 'ε' in set.intersection(*[First[j] for j in production]):
+                    if 'ε' in set.intersection(*[First[j] for j in production]):    #Verify all sets have epsilon.
                         changed = len(First[nt])
                         First[nt].add('ε')
                         if len(First[nt]) > changed: added = True 
@@ -58,22 +63,23 @@ class Parser:
         eliminate_TF = self.grammar.Terminals
         for key in eliminate_TF:
             del First[key]                 
-                     
+             
         return First
     
+    #Select First symbols of a word.
     def first_of_word(self, word: str) -> set([]):
         First = self.first_set()
         for t in self.grammar.Terminals:
             First[t] = {t}
             
-        First_word = set([])
+        First_word = set([])    #Empty set.
         for i in range(len(word)):
             first_sub_i = [First[j] for j in word[:i]]
-            if i == 0:
+            if i == 0:  #Empty word.
                 first_sub_i.append({'ε'})
             if 'ε' in set.intersection(*first_sub_i):
-                First_word.update(First[word[i]]-{'ε'})
-        if 'ε' in set.intersection(*[First[j] for j in word]):
+                First_word.update(First[word[i]]-{'ε'}) #Updatting First_word without epsilon.
+        if 'ε' in set.intersection(*[First[j] for j in word]):  #Verify all sets have epsilon.
             First_word.add('ε')
             
         return First_word
@@ -140,20 +146,21 @@ class Parser:
     '''
 
     def follow_set(self) -> dict:
-        Follow = {}
+        Follow = {} #Create dictionary.
         added = True
         for nt in self.grammar.Non_Terminals:
-            Follow[nt] = set([])
+            Follow[nt] = set([])    #Empty set for all non-terminals.
         while added:
             added = False
             if '$' not in Follow[self.grammar.Initial]: 
-                Follow[self.grammar.Initial].add('$')
+                Follow[self.grammar.Initial].add('$')   #Add '$' to non-terminal's initial.
                 added = True
             for nt in self.grammar.Non_Terminals:
                 for production in self.grammar.Productions[nt]:
                     i = 0
                     for token in production:
                         i += 1
+                        #Rules to compute FOLLOW set.
                         if i == len(production) and token in self.grammar.Non_Terminals:
                             follow_len = len(Follow[token])
                             Follow[token].update(Follow[nt])

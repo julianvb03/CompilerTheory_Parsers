@@ -114,7 +114,6 @@ class BUParser(Parser):
 
         return items    
 
-    
     def predictive_parsing_table(self) -> set():       
         initial = self.closure(set([Item(0,"�",self.grammar.Initial)]))
         index = 0
