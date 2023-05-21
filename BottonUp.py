@@ -156,7 +156,7 @@ class BUParser(Parser):
                         if Action[mapping[frozenset(actual)]][symbol] == float('inf'):
                             Action[mapping[frozenset(actual)]][symbol] = ('s',mapping[frozenset(new_state)])
                         else:
-                            raise Exceptions.Not_LRSGramar(f'La gramatica tiene un erro en la creación de la tabla Action en el estado {mapping[frozenset(actual)]} para una acción del tipo shift')
+                            raise Exceptions.Not_LRSGramar(f'La gramatica tiene un error en la creación de la tabla Action en el estado {mapping[frozenset(actual)]} para una acción del tipo shift')
                     
             for state in states:
                 if state not in visiteds:
@@ -174,7 +174,7 @@ class BUParser(Parser):
                             if Action[mapping[frozenset(state)]][terminal] == float('inf'):
                                 Action[mapping[frozenset(state)]][terminal] = ('r',(item.non_terminal,item.production))
                             else:
-                                raise Exceptions.Not_LRSGramar(f'La gramatica tiene un erro en la creación de la tabla Action en el estado {mapping[frozenset(state)]} para una acción del tipo reduce')
+                                raise Exceptions.Not_LRSGramar(f'La gramatica tiene un error en la creación de la tabla Action en el estado {mapping[frozenset(state)]} para una acción del tipo reduce')
                     
         return Action, Goto, mapping
     

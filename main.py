@@ -39,10 +39,6 @@ def funciones_LR0(num, parser): #Procesar cadena / Sacar first y follow
         print("You selected 2")
         print(parser.__str__())
 
-    elif num == 3:
-        pass
-
-
     else:
         default_case()
 
@@ -69,7 +65,6 @@ def case_2(parser):
     print("Select an option:")
     print("1. Process string")
     print("2. First and follow")
-    print("3. Gramatic is LR(0)")
     print("=======================================\n")
     
     option = input("Enter an option: ")
@@ -81,7 +76,6 @@ def case_2(parser):
 
 def default_case():
     print("Invalid option")
-
 
 if __name__ == '__main__':
     while True:
